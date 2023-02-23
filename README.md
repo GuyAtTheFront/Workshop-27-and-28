@@ -234,14 +234,14 @@ Back to [Contents](#contents)
 
 > Returns all matching documents
 
-Mongo: 
+**Mongo:** 
 ```
 {
     $match: { ID: <Variable> }
 }
 ```
 
-Java:
+**Java:**
 ```
 MongoExpression matchIdExp = MongoExpression.create("""
         { ID: ?0 }""", <Variable>);
@@ -254,12 +254,12 @@ Back to [Contents](#contents)
 
 ### `$addfields` / `$set`
 
-> Insert a new field to all documents, and/or Update an existing field in all documents
-> Returns all fields in all documents, including the insertion/update
-> `$project` stage can acheive the same effect, but `$project` only returns projected fields
+> (a) Insert a new field to all documents, AND/OR (b) Update an existing field in all documents. 
+> Will returns all fields in all documents, including the insertion/update. 
+> `$project` stage can acheive the same effect, but `$project` only returns projected fields  
 > i.e. `$addfields` needs fewer lines-of-code than `$project`
 
-Mongo: 
+**Mongo:**
 ```
 {
     $addFields: {
@@ -268,7 +268,7 @@ Mongo:
 }
 ```
 
-Java:
+**Java:**
 ```
 AddFieldsOperation addEdited = Aggregation.addFields()
                                 .addField("edited")
@@ -283,7 +283,7 @@ Back to [Contents](#contents)
 
 #### Values / Objects
 
-Mongo:
+**Mongo:**
 ```
 {
     $project: {
@@ -308,7 +308,7 @@ Mongo:
 }
 ```
 
-Java:
+**Java:**
 ```
 final String addRatingFormatted = 
 """
