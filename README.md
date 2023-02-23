@@ -23,8 +23,8 @@
     * [`$addfields`](#addfields--set)
     * [`$project`](#project)
     * [`$group`](#group)
-        * [Value](#values-and-objects)
-        * [Object](#values-and-objects)
+        * [Value](##values--objects)
+        * [Object](##values--objects)
         * [Literal](#literals)
     * [`$lookup`](#lookup)
     * [`$unwind`](#unwind)
@@ -474,3 +474,5 @@ Back to [Contents](#contents)
 ```
 SortOperation sortRating = Aggregation.sort(Sort.Direction.DESC, "rating");
 ```
+
+Back to [Contents](#contents)
