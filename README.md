@@ -4,7 +4,7 @@
     * `insertOne()`
     * `updateOne()`
 
-* [Mongo Aggregation](mongo-aggregation)
+* [Mongo Aggregation](#mongo-aggregations)
     * `$project`
         * `$ifNull` / `$last` / `$$NOW` / `$concat`
         * `$cond` / `$isNumber` / `$not`
@@ -18,14 +18,14 @@
     * `$group`
 
 
-* [Mongo Aggregation to Java](mongo-aggregation-to-java)
-    * [`$match`]($match)
-    * `$addfields`
-    * `$project`
-    * `$group`
-    * `$lookup`
-    * `$unwind`
-    * `$sort`
+* [Mongo Aggregation to Java](#mongo-aggregation-to-java)
+    * [`$match`](#match)
+    * [`$addfields`](#addfields--set)
+    * [`$project`](#project)
+    * [`$group`](#group)
+    * [`$lookup`](#lookup)
+    * [`$unwind`](#unwind)
+    * [`$sort`](#sort)
 
 ## Mongo Queries
 
@@ -406,7 +406,7 @@ GroupOperation groupByGid = Aggregation.group()
 
 
 ### `$lookup`
-Mongo:
+**Mongo:**
 ```
 {
     $lookup: {
@@ -418,7 +418,7 @@ Mongo:
 }
 ```
 
-Java:
+**Java:**
 ```
 LookupOperation lookupGames = Aggregation.lookup(
                                 COLLECTION_GAMES, 
