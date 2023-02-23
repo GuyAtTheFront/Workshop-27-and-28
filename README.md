@@ -23,6 +23,9 @@
     * [`$addfields`](#addfields--set)
     * [`$project`](#project)
     * [`$group`](#group)
+        * [Value](#values-and-objects)
+        * [Object](#values-and-objects)
+        * [Literal](#literals)
     * [`$lookup`](#lookup)
     * [`$unwind`](#unwind)
     * [`$sort`](#sort)
@@ -54,6 +57,7 @@ db.reviews.updateOne(
 );
 ```
 
+Back to [Contents](#contents)
 
 ## Mongo Aggregations
 
@@ -222,6 +226,8 @@ db.reviews.aggregate([
 ]);
 ```
 
+Back to [Contents](#contents)
+
 ## Mongo Aggregation To Java
 
 ### `$match`
@@ -231,13 +237,20 @@ db.reviews.aggregate([
 Mongo: 
 ```
 {
-    $match: { ID: 1 }
+    $match: { ID: <Variable> }
 }
 ```
 
 Java:
 ```
+MongoExpression matchIdExp = MongoExpression.create("""
+        { ID: ?0 }""", <Variable>);
+
+MatchOperation matchId = Aggregation.match(AggregationExpression.from(matchIdExp));
+
 ```
+
+Back to [Contents](#contents)
 
 ### `$addfields` / `$set`
 
@@ -264,9 +277,11 @@ AddFieldsOperation addEdited = Aggregation.addFields()
 
 ```
 
+Back to [Contents](#contents)
+
 ### `$project`
 
-#### Projecting Values / Objects
+#### Values / Objects
 
 Mongo:
 ```
@@ -324,11 +339,11 @@ ProjectionOperation projectData = Aggregation.project("gid")
                                     .and(AggregationExpression.from(addRatingExp)).as("rating");
 ```
 
----------------------
+Back to [Contents](#contents)
 
-#### Projecting Literals
+#### Literals
 
-Mongo:
+**Mongo:**
 ```
 {
     $project: {
@@ -340,7 +355,7 @@ Mongo:
 }
 ```
 
-Java:
+**Java:**
 ```
 ProjectionOperation projectOutput = Aggregation.project().andExclude("_id")
                 .and(direction).asLiteral().as("rating")
@@ -348,11 +363,13 @@ ProjectionOperation projectOutput = Aggregation.project().andExclude("_id")
                 .andExpression("'$games'").as("games");
 ```
 
+Back to [Contents](#contents)
+
 ### `$group`
 
 #### Group by _id and push original document into output
 
-Mongo:
+**Mongo:**
 ```
 {
     $group: {
@@ -362,7 +379,7 @@ Mongo:
 }
 ```
 
-Java:
+**Java:**
 ```
 final String pushRoot = 
 """
@@ -380,7 +397,7 @@ GroupOperation groupByGid = Aggregation.group("$gid")
 
 #### Group Null - Group all documents into a single Array
 
-Mongo:
+**Mongo:**
 ```
 {
     $group: {
@@ -390,7 +407,7 @@ Mongo:
 }
 ```
 
-Java:
+**Java:**
 ```
 final String pushRoot = 
 """
@@ -404,6 +421,7 @@ GroupOperation groupByGid = Aggregation.group()
                             .and("others", AggregationExpression.from(pushRootExp));
 ```
 
+Back to [Contents](#contents)
 
 ### `$lookup`
 **Mongo:**
@@ -427,29 +445,32 @@ LookupOperation lookupGames = Aggregation.lookup(
                                 "game");
 ```
 
+Back to [Contents](#contents)
+
 ### `$unwind`
-Mongo:
+**Mongo:**
 ```
 {
     $unwind: "$game"
 }
 ```
 
-Java:
+**Java:**
 ```
 UnwindOperation unwindGame = Aggregation.unwind("game");
 ```
 
+Back to [Contents](#contents)
 
 ### `$sort`
-Mongo:
+**Mongo:**
 ```
 {
     $sort: {"rating": -1}
 }
 ```
 
-Java:
+**Java:**
 ```
 SortOperation sortRating = Aggregation.sort(Sort.Direction.DESC, "rating");
 ```
