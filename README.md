@@ -1,7 +1,6 @@
 # Contents
-==================
 
-* [Mongo Queries](mongo-queries)
+* [Mongo Queries](#mongo-queries)
     * `insertOne()`
     * `updateOne()`
 
